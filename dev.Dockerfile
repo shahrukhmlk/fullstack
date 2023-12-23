@@ -26,7 +26,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 # Start Next.js in development mode based on the preferred package manager
 CMD \
   if [ -f yarn.lock ]; then yarn dev; \
-  elif [ -f package-lock.json ]; then npm run dev-sb; \
+  elif [ -f package-lock.json ]; then npm run dev; \
   elif [ -f pnpm-lock.yaml ]; then pnpm dev; \
   else yarn dev; \
   fi

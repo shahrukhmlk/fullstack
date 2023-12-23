@@ -20,6 +20,8 @@ git clone https://github.com/shahrukhmlk/fullstack.git
 
 1. Copy all the files from `secrets` folder to the root directory and edit accordingly. This is required for docker compose to read the secrets.
 
+1. TEMP Fix directus permissions: Grant all users all permissions to `data` folder.
+
 1. Install [Docker Desktop](https://docs.docker.com/get-docker).
 
 Docker Desktop includes Docker Compose as part of the installation.
@@ -35,10 +37,6 @@ docker compose -f docker-compose.dev.yml build
 # Up dev
 docker compose -f docker-compose.dev.yml up
 ```
-
-### 2. TEMP Fix directus permissions
-
-Grant all users all permissions to `data` folder.
 
 ### 3. Access different systems
 
