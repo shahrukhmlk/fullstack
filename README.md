@@ -15,7 +15,7 @@ This example contains everything needed to get NextJS and Directus development, 
 1. Create a repository using this template repository.
 
 ```
-git clone https://github.com/shahrukhmlk/nextjs-template.git
+git clone https://github.com/shahrukhmlk/fullstack.git
 ```
 
 1. Copy all the files from `secrets` folder to the root directory and edit accordingly. This is required for docker compose to read the secrets.
