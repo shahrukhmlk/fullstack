@@ -1,8 +1,96 @@
-# Develop
+# NextJS Web App Template with docker support
 
-## With Docker
+This example contains everything needed to get NextJS and Directus development, staging and production environment up and running with Docker Compose or only Docker or without any of them.
 
-Read [README.md](../README.md) in the parent repo.
+## Benefits of Docker Compose
+
+- Develop locally without Node.js or TypeScript installed ✨
+- Easy to run, consistent development environment across macOS, Windows, and Linux teams
+- Run multiple Next.js apps, databases, and other microservices in a single deployment
+- Multistage builds combined with [Output Standalone](https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files) outputs up to 85% smaller apps (Approximately 110 MB compared to 1 GB with create-next-app)
+- Easy configuration with YAML files
+
+## How to use
+
+1. Create a repository using this template repository.
+
+```
+git clone https://github.com/shahrukhmlk/nextjs-template.git
+```
+
+1. Copy all the files from `secrets` folder to the root directory and edit accordingly. This is required for docker compose to read the secrets.
+
+1. Install [Docker Desktop](https://docs.docker.com/get-docker).
+
+Docker Desktop includes Docker Compose as part of the installation.
+
+## Development
+
+### 1. Run the development server:
+
+```bash
+# Build dev
+docker compose -f docker-compose.dev.yml build
+
+# Up dev
+docker compose -f docker-compose.dev.yml up
+```
+
+### 2. TEMP Fix directus permissions
+
+Grant all users all permissions to `data` folder.
+
+### 3. Access different systems
+
+- NextJS: Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing. The page auto-updates as you edit the file.
+
+- Storybook: Open [http://localhost:6006](http://localhost:3000) with your browser to see the result.
+
+- Directus: Open [http://localhost:8055](http://localhost:8055) with your browser to see the result.
+
+TODO:
+
+- Database: Open [http://localhost:8055](http://localhost:8055) with your browser to see the result.
+
+## Staging
+
+Multistage builds are highly recommended in staging. Combined with the Next [Output Standalone](https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files) feature, only `node_modules` files required for production are copied into the final Docker image.
+
+First, run the staging server (Final image approximately 110 MB).
+
+```bash
+# Build stage
+docker compose -f docker-compose.stage.yml build
+
+# Up stage in detached mode
+docker compose -f docker-compose.stage.yml up -d
+```
+
+## Production
+
+Multistage builds are highly recommended in production. Combined with the Next [Output Standalone](https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files) feature, only `node_modules` files required for production are copied into the final Docker image.
+
+First, run the production server (Final image approximately 110 MB).
+
+```bash
+# Build prod
+docker compose -f docker-compose.prod.yml build
+
+# Up prod in detached mode
+docker compose -f docker-compose.prod.yml up -d
+```
+
+## Useful commands
+
+```bash
+# Stop all running containers
+docker kill $(docker ps -aq) && docker rm $(docker ps -aq)
+
+# Free space
+docker system prune -af --volumes
+```
 
 ## Without Docker
 
@@ -10,37 +98,8 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-# Production/Staging
-
-## Using Docker
-
-1. Build your container: `docker build -t shahrukh.io:frontend .`.
-1. Run your container: `docker run -p 3000:3000 shahrukh.io:frontend`.
-
-You can view your images created with `docker images`.
-
-## Deploying to Google Cloud Run
-
-1. Install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) so you can use `gcloud` on the command line.
-1. Run `gcloud auth login` to log in to your account.
-1. [Create a new project](https://cloud.google.com/run/docs/quickstarts/build-and-deploy) in Google Cloud Run (e.g. `nextjs-docker`). Ensure billing is turned on.
-1. Build your container image using Cloud Build: `gcloud builds submit --tag gcr.io/PROJECT-ID/helloworld --project PROJECT-ID`. This will also enable Cloud Build for your project.
-1. Deploy to Cloud Run: `gcloud run deploy --image gcr.io/PROJECT-ID/helloworld --project PROJECT-ID --platform managed`. Choose a region of your choice.
-
-   - You will be prompted for the service name: press Enter to accept the default name, `helloworld`.
-   - You will be prompted for [region](https://cloud.google.com/run/docs/quickstarts/build-and-deploy#follow-cloud-run): select the region of your choice, for example `us-central1`.
-   - You will be prompted to **allow unauthenticated invocations**: respond `y`.

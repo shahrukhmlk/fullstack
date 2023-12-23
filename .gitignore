@@ -36,3 +36,15 @@ yarn-error.log*
 next-env.d.ts
 
 certificates
+
+# Data directory
+/data
+
+!/data/directus-snapshots
+!/data/directus-extensions
+
+# Secrets
+/directus_password
+/directus_email
+/db_password
+/db_user
