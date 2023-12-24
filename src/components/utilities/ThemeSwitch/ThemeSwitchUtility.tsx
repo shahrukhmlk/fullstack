@@ -25,7 +25,6 @@ const ThemeSwitchUtility: React.FC<IThemeSwitchUtility> = ({
 
   return (
     <ToggleGroup
-      variant={"outline"}
       type="single"
       value={theme}
       onValueChange={setTheme}
