@@ -1,9 +1,9 @@
 export interface IBaseTemplate {
-  sampleTextProp: string
+  className?: string
 }
 
-const BaseTemplate: React.FC<IBaseTemplate> = ({ sampleTextProp }) => {
-  return <div className={""}>{sampleTextProp}</div>
+const BaseTemplate: React.FC<IBaseTemplate> = ({ className }) => {
+  return <div className={className}></div>
 }
 
 export default BaseTemplate
