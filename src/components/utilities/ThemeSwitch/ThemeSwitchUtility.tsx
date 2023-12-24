@@ -4,7 +4,13 @@ import { useTheme } from "next-themes"
 import { Moon, Sun, SunMoon } from "lucide-react"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
-const ThemeSwitch = () => {
+export interface IThemeSwitchUtility {
+  className?: string
+}
+
+const ThemeSwitchUtility: React.FC<IThemeSwitchUtility> = ({
+  className: className,
+}) => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
@@ -19,11 +25,10 @@ const ThemeSwitch = () => {
 
   return (
     <ToggleGroup
-      variant={"outline"}
       type="single"
       value={theme}
       onValueChange={setTheme}
-      className="absolute bottom-4 right-4"
+      className={className}
     >
       <ToggleGroupItem value="light">
         <Sun />
@@ -38,4 +43,4 @@ const ThemeSwitch = () => {
   )
 }
 
-export default ThemeSwitch
+export default ThemeSwitchUtility
